@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -14,14 +12,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+## How it works
 
-To learn more about Next.js, take a look at the following resources:
+With the introduction of getServerSideProps and getStaticProps, things became a bit difficult, because the two forms of pre-rendering only run on the server side which was not the case with getInitialProps which ran and on the client side and server side.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In the reducers, in the swich cases, we will have to implement the HYDRATE case first which will allow our client and server state to be reconciled because our stare must merge in order to avoid the clash between client and server.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+you can still always use getInitialProps and dispatch the actions in _app, which is not without consequence because you will not benefit from the automatic static optimization offered by next js. that's why in all our pages we implement the checkServerSideCookie function in order to load the token if it exists. we can also remove this function from all our pages and implement it only in _app but again we would be depriving ourselves of static optimization because of getInitialProps.
 
 ## Deploy on Vercel
 
